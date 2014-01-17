@@ -8,7 +8,7 @@ Requirements
 
 - Virtualbox 4.2
 - Vagrant 1.4
-- Vagrant Hostmanager Plugin
+- [Vagrant Hostmanager Plugin](https://github.com/smdahlen/vagrant-hostmanager)
 - Ruby 1.9.3
 - Bundler 1.3.5
 - Puppet
