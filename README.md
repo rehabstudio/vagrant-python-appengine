@@ -1,7 +1,7 @@
-Prototypes
-====
+PHP/NGINX/MySQL VAGRANT BOX
+===========================
 
-Simple prototyping vagrant build. This will boot up an nginx/php/mysql ubuntu box for a single instance. It uses host manager for easy local DNS configuration. 
+Simple vagrant build for a general php/mysql setup on nginx. This will boot up an nginx/php/mysql ubuntu box for a single instance. It uses host manager for easy local DNS configuration. 
 
 Requirements
 ------------
