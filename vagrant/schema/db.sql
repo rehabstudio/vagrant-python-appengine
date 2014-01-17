@@ -1,1 +1,1 @@
-CREATE DATABASE myappname;
+CREATE DATABASE IF NOT EXISTS myappname;
