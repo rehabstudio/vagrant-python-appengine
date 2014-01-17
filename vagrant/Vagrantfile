@@ -1,0 +1,46 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# GLOBALS
+IP="192.168.10.01"
+DOMAIN="rehab.vagrant.local"
+RAM="512"
+VAGRANTFILE_API_VERSION="2"
+
+Vagrant.require_version ">= 1.4.0"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+    # Hostmanager configuration
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = true
+    
+    # Distro info
+    config.vm.box = "base"
+    config.vm.box_url = "http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-vagrant-amd64-disk1.box"
+
+    config.vm.provision :shell, :path => "vagrant.sh"
+    
+    # Puppet info
+    config.vm.provision :puppet do |puppet|
+        puppet.manifests_path = "puppet/manifests"
+        puppet.manifest_file  = "init.pp"
+        puppet.module_path = "puppet/modules"
+    end
+
+    config.vm.define 'rehab-box' do |node|
+        node.vm.hostname = DOMAIN 
+        node.vm.network "private_network", ip: IP
+    end
+
+    config.ssh.forward_agent = true
+
+    config.vm.synced_folder "../app", "/var/www/app"
+    config.vm.synced_folder "logs", "/var/logs/app"
+
+    # Virtualbox config
+    config.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", RAM] 
+    end
+end

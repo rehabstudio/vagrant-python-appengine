@@ -1,0 +1,31 @@
+server {
+    listen      80;
+    server_name _;
+    root        /var/www/app;
+    index       index.php index.html;
+
+    access_log  /var/logs/app/access.log;
+    error_log   /var/logs/app/error.log;
+
+    location / {
+        try_files $uri $uri/ /index.php?$uri&$args;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+    }
+
+    ## Favicon Not Found
+    location = /favicon.ico {
+        access_log off;
+        log_not_found off;
+    }
+
+    ## Robots.txt Not Found
+    location = /robots.txt {
+        access_log off;
+        log_not_found off;
+    }
+}
