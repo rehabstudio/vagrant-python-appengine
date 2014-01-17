@@ -1,2 +1,0 @@
-2014/01/16 13:55:23 [crit] 13478#0: *1 connect() to unix:/var/run/php5-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 127.0.0.1, server: _, request: "GET / HTTP/1.0", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "localhost"
-2014/01/16 13:58:02 [crit] 13568#0: *3 connect() to unix:/var/run/php5-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 127.0.0.1, server: _, request: "GET / HTTP/1.0", upstream: "fastcgi://unix:/var/run/php5-fpm.sock:", host: "localhost"
