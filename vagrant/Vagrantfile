@@ -12,15 +12,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Hostmanager plugin configuration.
     config.hostmanager.enabled = true
-    config.hostmanager.include_offline = true
     config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = true
     config.hostmanager.manage_host = true
 
     # Every Vagrant virtual environment requires a box to build off of.
-    # We're supplying he url from where the box will be fetched if it
+    # We're supplying the url from where the box will be fetched if it
     # doesn't already exist on the users system.
     config.vm.box = "precise64"
     config.vm.box_url = "http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-vagrant-amd64-disk1.box"
+
+    # If true, then any SSH connections made will enable agent forwarding.
+    config.ssh.forward_agent = true
 
     config.vm.provision :shell, :path => "vagrant.sh"
     
@@ -36,8 +39,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.network "private_network", ip: IP
     end
 
-    config.ssh.forward_agent = true
 
+
+    # Share additional folders to the guest VM.
     config.vm.synced_folder "../app", "/var/www/app"
     config.vm.synced_folder "logs", "/var/logs/app"
 
