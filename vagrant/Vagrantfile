@@ -3,10 +3,10 @@
 
 # Global variables. Tailor to your projects needs.
 VB_NAME = "Insert Project Name Here"
-VB_RAM="512"
-DOMAIN="rehab.vagrant.local"
-IP="192.168.10.01"
-VAGRANTFILE_API_VERSION="2"
+VB_RAM = "512"
+DOMAIN = "rehab.vagrant.local"
+IP = "192.168.10.01"
+VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.require_version ">= 1.4.0"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -23,7 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box = "precise64"
     config.vm.box_url = "http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-vagrant-amd64-disk1.box"
 
-    # If true, then any SSH connections made will enable agent forwarding.
+    # If true, then any SSH connections made inside the box will also use hosts keys (agent forwarding).
     config.ssh.forward_agent = true
 
     # Applying box specific settings.
@@ -42,7 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder "logs", "/var/logs/app"
 
     # Before puppet provisioner (to update packages).
-    config.vm.provision :shell, :path => "vagrant.sh"
+    config.vm.provision :shell, :path => "before_puppet.sh"
 
     # Puppet provisioner.
     config.vm.provision :puppet do |puppet|
@@ -50,6 +50,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         puppet.manifests_path = "puppet/manifests"
         puppet.module_path = "puppet/modules"
     end
+
+    # After puppet provisioner (for project specific requirements).
+    config.vm.provision :shell, :path => "after_puppet.sh"
 
     # Provider specific configuration so you can fine-tune properties.
     config.vm.provider :virtualbox do |vb|
