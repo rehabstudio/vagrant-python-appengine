@@ -31,4 +31,12 @@ class php {
         require => Package['php-pear'];
     }
 
+    exec { 'composer-install':
+        command => "curl -sS https://getcomposer.org/installer | php && \
+                    mv composer.phar /usr/local/bin/composer",
+        creates => '/usr/local/bin/composer',
+        path    => ['/bin', '/usr/bin'],
+        require => Package['php5']
+    }
+
 }
