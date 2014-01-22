@@ -1,10 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# GLOBALS
-IP="192.168.10.01"
+# Global variables. Tailor to your projects needs.
+VB_NAME = "Insert Project Name Here"
+VB_RAM="512"
 DOMAIN="rehab.vagrant.local"
-RAM="512"
+IP="192.168.10.01"
 VAGRANTFILE_API_VERSION="2"
 
 Vagrant.require_version ">= 1.4.0"
@@ -25,29 +26,35 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # If true, then any SSH connections made will enable agent forwarding.
     config.ssh.forward_agent = true
 
-    config.vm.provision :shell, :path => "vagrant.sh"
-    
-    # Puppet info
-    config.vm.provision :puppet do |puppet|
-        puppet.manifests_path = "puppet/manifests"
-        puppet.manifest_file  = "init.pp"
-        puppet.module_path = "puppet/modules"
+    # Applying box specific settings.
+    config.vm.define "rehab-box", primary: true do |node|
+
+        # Setting the hostname so it can be used in conjunction with the HostManager plugin.
+        node.vm.hostname = DOMAIN;
+
+        # Create a private network, which allows host-only access to the machine using a specific IP.
+        node.vm.network :private_network, ip: IP
+
     end
-
-    config.vm.define 'rehab-box' do |node|
-        node.vm.hostname = DOMAIN 
-        node.vm.network "private_network", ip: IP
-    end
-
-
 
     # Share additional folders to the guest VM.
     config.vm.synced_folder "../app", "/var/www/app"
     config.vm.synced_folder "logs", "/var/logs/app"
 
-    # Virtualbox config
+    # Before puppet provisioner (to update packages).
+    config.vm.provision :shell, :path => "vagrant.sh"
+
+    # Puppet provisioner.
+    config.vm.provision :puppet do |puppet|
+        puppet.manifest_file  = "init.pp"
+        puppet.manifests_path = "puppet/manifests"
+        puppet.module_path = "puppet/modules"
+    end
+
+    # Provider specific configuration so you can fine-tune properties.
     config.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", RAM] 
+        vb.name = VB_NAME
+        vb.memory = VB_RAM
     end
 
 end
