@@ -5,7 +5,7 @@
 VB_NAME = "Insert Project Name Here"
 VB_RAM = "512"
 DOMAIN = "rehab.vagrant.local"
-IP = "192.168.10.01"
+IP = "192.168.33.10"
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.require_version ">= 1.4.0"
