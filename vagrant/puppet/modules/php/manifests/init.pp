@@ -22,7 +22,7 @@ class php {
         ensure => present;
     }
 
-    exec { 'phpunit':
+    exec { 'phpunit-install':
         command => "pear upgrade PEAR && \
                     pear config-set auto_discover 1 && \
                     pear install --alldeps pear.phpunit.de/PHPUnit",
