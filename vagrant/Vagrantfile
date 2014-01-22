@@ -35,6 +35,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         # Create a private network, which allows host-only access to the machine using a specific IP.
         node.vm.network :private_network, ip: IP
 
+        # Custom port mapping for MySQL traffic.
+        node.vm.network :forwarded_port, host: 6033, guest: 3306
+
     end
 
     # Share additional folders to the guest VM.
