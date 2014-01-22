@@ -11,8 +11,10 @@
 =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 
    rehabstudio Vagrant box
+   "This box was made by much Trial and Derp."
    
-   Note: all configuration should be done using Vagrant and the associated provisioners
+   Note: All configuration should be done using Vagrant and the associated provisioners.
+
 
 =~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=~=
 
