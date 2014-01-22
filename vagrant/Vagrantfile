@@ -10,13 +10,15 @@ VAGRANTFILE_API_VERSION="2"
 Vagrant.require_version ">= 1.4.0"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-    # Hostmanager configuration
+    # Hostmanager plugin configuration.
     config.hostmanager.enabled = true
-    config.hostmanager.manage_host = true
-    config.hostmanager.ignore_private_ip = false
     config.hostmanager.include_offline = true
-    
-    # Distro info
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.manage_host = true
+
+    # Every Vagrant virtual environment requires a box to build off of.
+    # We're supplying he url from where the box will be fetched if it
+    # doesn't already exist on the users system.
     config.vm.box = "precise64"
     config.vm.box_url = "http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-vagrant-amd64-disk1.box"
 
@@ -43,4 +45,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provider :virtualbox do |vb|
         vb.customize ["modifyvm", :id, "--memory", RAM] 
     end
+
 end
