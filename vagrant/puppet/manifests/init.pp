@@ -3,7 +3,7 @@ Exec {
     path => ['/bin', '/sbin', '/usr/bin', '/usr/sbin']
 }
 
+include other
 include nginx
 include php
 include mysql
-include other

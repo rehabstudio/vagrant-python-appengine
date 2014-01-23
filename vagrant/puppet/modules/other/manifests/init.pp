@@ -4,7 +4,9 @@ class other {
         'curl',
         'git-core',
         'vim',
-        'lynx'
+        'lynx',
+        'libaugeas-ruby',
+        'augeas-tools'
     ]
 
     package { $modules:
