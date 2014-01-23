@@ -22,6 +22,11 @@ class php {
         ensure => present;
     }
 
+    service { 'php5-fpm':
+        ensure  => running,
+        require => Package['php5-fpm'];
+    }
+
     exec { 'phpunit-install':
         command => "pear upgrade PEAR && \
                     pear config-set auto_discover 1 && \
@@ -32,6 +37,22 @@ class php {
 
     class { 'composer':
         require => [Package['php5'], Package['curl'], Package['git-core']];
+    }
+
+    # Updating particular settings in the ini file without doing a file overwrite.
+    augeas { 'php.ini':
+        notify => [Service['php5-fpm'], Service['nginx']],
+        require => [Package['libaugeas-ruby'], Package['augeas-tools'], Package['php5']],
+        context => '/files/etc/php5/fpm/php.ini',
+        changes => [
+            "set PHP/short_open_tag Off",
+            "set PHP/expose_php Off",
+            "set PHP/display_errors On",
+            "set PHP/html_errors On",
+            "set PHP/post_max_size 128M",
+            "set PHP/upload_max_filesize 128M",
+            "set Date/date.timezone Europe/Belfast"
+        ]
     }
 
 }
