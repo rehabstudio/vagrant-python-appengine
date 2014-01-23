@@ -27,7 +27,6 @@ class php {
                     pear config-set auto_discover 1 && \
                     pear install --alldeps pear.phpunit.de/PHPUnit",
         creates => '/usr/bin/phpunit',
-        path    => ['/bin', '/usr/bin'],
         require => Package['php-pear'];
     }
 
@@ -35,7 +34,6 @@ class php {
         command => "curl -sS https://getcomposer.org/installer | php && \
                     mv composer.phar /usr/local/bin/composer",
         creates => '/usr/local/bin/composer',
-        path    => ['/bin', '/usr/bin'],
         require => [Package['php5'], Package['git-core']]
     }
 
