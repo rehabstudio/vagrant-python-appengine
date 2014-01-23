@@ -36,7 +36,7 @@ class php {
                     mv composer.phar /usr/local/bin/composer",
         creates => '/usr/local/bin/composer',
         path    => ['/bin', '/usr/bin'],
-        require => Package['php5']
+        require => [Package['php5'], Package['git-core']]
     }
 
 }

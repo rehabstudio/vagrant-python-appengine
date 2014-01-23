@@ -2,6 +2,7 @@ class other {
 
     $modules = [
         'curl',
+        'git-core',
         'vim',
         'lynx'
     ]
