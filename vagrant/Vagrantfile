@@ -6,10 +6,9 @@ VB_NAME = "Insert Project Name Here"
 VB_RAM = "512"
 DOMAIN = "rehab.vagrant.local"
 IP = "192.168.33.10"
-VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.require_version ">= 1.4.0"
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+Vagrant.configure("2") do |config|
 
     # Hostmanager plugin configuration.
     config.hostmanager.enabled = true
