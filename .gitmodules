@@ -7,3 +7,6 @@
 [submodule "vagrant/puppet/modules/apt"]
 	path = vagrant/puppet/modules/apt
 	url = https://github.com/puppetlabs/puppetlabs-apt.git
+[submodule "vagrant/puppet/modules/php"]
+	path = vagrant/puppet/modules/php
+	url = https://github.com/jippi/puppet-php.git
