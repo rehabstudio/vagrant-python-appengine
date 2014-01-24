@@ -32,7 +32,7 @@ mysql::db { $databaseName:
 # Ensuring the user is added as a wildcard.
 mysql_user { "${databaseUser}@%":
     password_hash => mysql_password("${databasePass}"),
-    require => [ Class['mysql::server'] ]
+    require => Class['mysql::server']
 }
 
 # Ensuring the users privileges are correct.
@@ -42,7 +42,7 @@ mysql_grant { "${databaseUser}@%/${databaseName}":
     privileges => ['ALL'],
     table => '*.*',
     user => "${databaseUser}@%",
-    require => [ Class['mysql::server'] ]
+    require => Class['mysql::server']
 }
 
 include other
