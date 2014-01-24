@@ -1,1 +1,1 @@
-CREATE DATABASE IF NOT EXISTS myappname;
+CREATE DATABASE IF NOT EXISTS `your-database-name`;CREATE TABLE IF NOT EXISTS `your-database-name`.`test_table` (  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,  `title` varchar(100) NOT NULL,  PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
