@@ -40,3 +40,12 @@ class mysql {
 - Once your module is complete you can call it from the main puppet manifests file (/puppet/manifests/init.pp) by using the syntax: 'include mysql'
 - Run 'vagrant reload --provision' to pull in your new config
 To get a better feel for it have a look in the puppet/ directory
+
+MySQL Access
+-------
+
+The configuration file is updated with the host IP so you can remotely connect to the MySQL server, using a command such as the following:
+
+```
+mysql --host=192.168.33.10 --user=username --password=password
+```
