@@ -1,0 +1,6 @@
+[submodule "vagrant/puppet/modules/mysql"]
+	path = vagrant/puppet/modules/mysql
+	url = https://github.com/puppetlabs/puppetlabs-mysql.git
+[submodule "vagrant/puppet/modules/stdlib"]
+	path = vagrant/puppet/modules/stdlib
+	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
