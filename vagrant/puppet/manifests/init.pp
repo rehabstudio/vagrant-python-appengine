@@ -95,5 +95,39 @@ augeas { 'php.ini':
     ]
 }
 
-include nginx
+# Installing nginx package and setting up its conf file.
+class { 'nginx':
+    server_tokens => 'off',
+    nginx_error_log => '/var/logs/app/error.log',
+    http_access_log => '/var/logs/app/access.log';
+}
+
+# Adding a vhost file for the project.
+nginx::resource::vhost { 'rehab.vagrant.local':
+    www_root => '/var/www/app',
+    error_log => '/var/logs/app/error.log',
+    access_log => '/var/logs/app/access.log',
+    index_files => ['index.php', 'index.html'],
+    try_files => ['$uri', '$uri/', '/index.php?url=$uri&$args'];
+}
+
+# Pushing all PHP files to FastCGI Process Manager (php5-fpm).
+nginx::resource::location { 'rehab.vagrant.local php files':
+    vhost => 'rehab.vagrant.local',
+    www_root => '/var/www/app',
+    fastcgi => '127.0.0.1:9000',
+    location => '~ \.php$',
+    location_cfg_append => {
+        fastcgi_param => 'APPLICATION_ENV local',
+        fastcgi_index => 'index.php'
+    },
+    notify => Class['nginx::service'];
+}
+
+# Ensuring the www-data user is part of the vagrant group so files can be modified.
+user { 'www-data':
+    groups => ['vagrant'],
+    notify => Class['nginx::service']
+}
+
 include other
