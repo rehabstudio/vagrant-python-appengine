@@ -130,4 +130,21 @@ user { 'www-data':
     notify => Class['nginx::service']
 }
 
-include other
+# Installing other useful packages.
+package { [
+    'curl',
+    'git-core',
+    'vim',
+    'libaugeas-ruby',
+    'augeas-tools'
+]:
+    ensure => present;
+}
+
+# Applying a custom sign-in message for the box.
+file { 'Custom Sign-in Message':
+    ensure  => present,
+    replace => true,
+    path => '/etc/motd',
+    source  => '/vagrant/files/welcome.txt';
+}
