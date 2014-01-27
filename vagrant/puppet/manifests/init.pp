@@ -68,7 +68,8 @@ php::extension { 'php-extensions':
     package => ['php5-cli', 'php5-curl', 'php5-dev',
                 'php5-gd', 'php5-imagick', 'php5-mcrypt',
                 'php5-mysql', 'php5-pspell', 'php5-xdebug',
-                'php5-xmlrpc', 'php5-tidy', 'php5-xsl'];
+                'php5-xmlrpc', 'php5-tidy', 'php5-xsl'],
+    notify => Service['php5-fpm'];
 }
 
 # Installing PHPUnit via Pear.
