@@ -133,6 +133,8 @@ user { 'www-data':
 # Installing other useful packages.
 package { [
     'curl',
+    'unzip',
+    'zip',
     'git-core',
     'vim',
     'libaugeas-ruby',
