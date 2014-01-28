@@ -1,8 +1,19 @@
-# Project specific settings.
+# Database configuration.
 $databaseName = 'your-database-name'
 $databaseUser = 'projectuser'
 $databasePass = '6LG621D15l37Yzv'
 $databaseFile = '/vagrant/schema/db.sql'
+
+# PHP configuration.
+$phpIniSettings = [
+    "set PHP/short_open_tag Off",
+    "set PHP/expose_php Off",
+    "set PHP/display_errors On",
+    "set PHP/html_errors On",
+    "set PHP/post_max_size 128M",
+    "set PHP/upload_max_filesize 128M",
+    "set Date/date.timezone Europe/Belfast"
+]
 
 # Adding a global exec statement so we don't have to add paths to every one.
 Exec {
@@ -65,10 +76,12 @@ class {
 # Installing PHP Extensions.
 php::extension { 'php-extensions':
     ensure => installed,
-    package => ['php5-cli', 'php5-curl', 'php5-dev',
-                'php5-gd', 'php5-imagick', 'php5-mcrypt',
-                'php5-mysql', 'php5-pspell', 'php5-xdebug',
-                'php5-xmlrpc', 'php5-tidy', 'php5-xsl'],
+    package => [
+        'php5-cli', 'php5-curl', 'php5-dev',
+        'php5-gd', 'php5-imagick', 'php5-mcrypt',
+        'php5-mysql', 'php5-pspell', 'php5-xdebug',
+        'php5-xmlrpc', 'php5-tidy', 'php5-xsl'
+    ],
     notify => Service['php5-fpm'];
 }
 
@@ -84,15 +97,7 @@ augeas { 'php.ini':
     notify => Service['php5-fpm'],
     require => [Package['libaugeas-ruby'], Package['augeas-tools'], Package['php5-fpm']],
     context => '/files/etc/php5/fpm/php.ini',
-    changes => [
-        "set PHP/short_open_tag Off",
-        "set PHP/expose_php Off",
-        "set PHP/display_errors On",
-        "set PHP/html_errors On",
-        "set PHP/post_max_size 128M",
-        "set PHP/upload_max_filesize 128M",
-        "set Date/date.timezone Europe/Belfast"
-    ]
+    changes => $phpIniSettings
 }
 
 # Installing nginx package and setting up its conf file.
