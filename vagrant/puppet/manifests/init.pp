@@ -1,5 +1,6 @@
-# General configuration.
+# Nginx configuration.
 $siteRoot = '/var/www/app'
+$vhostName = 'rehab.vagrant.local'
 
 # Database configuration.
 $databaseName = 'your-database-name'
@@ -111,7 +112,7 @@ class { 'nginx':
 }
 
 # Adding a vhost file for the project.
-nginx::resource::vhost { 'rehab.vagrant.local':
+nginx::resource::vhost { $vhostName:
     www_root => $siteRoot,
     error_log => '/var/logs/app/error.log',
     access_log => '/var/logs/app/access.log',
@@ -120,8 +121,8 @@ nginx::resource::vhost { 'rehab.vagrant.local':
 }
 
 # Pushing all PHP files to FastCGI Process Manager (php5-fpm).
-nginx::resource::location { 'rehab.vagrant.local php files':
-    vhost => 'rehab.vagrant.local',
+nginx::resource::location { "${vhostName} php files":
+    vhost => $vhostName,
     www_root => $siteRoot,
     fastcgi => '127.0.0.1:9000',
     location => '~ \.php$',
