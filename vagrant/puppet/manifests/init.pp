@@ -1,3 +1,6 @@
+# General configuration.
+$siteRoot = '/var/www/app'
+
 # Database configuration.
 $databaseName = 'your-database-name'
 $databaseUser = 'projectuser'
@@ -17,7 +20,7 @@ $phpIniSettings = [
 
 # Adding a global exec statement so we don't have to add paths to every one.
 Exec {
-    path => ['/bin', '/sbin', '/usr/bin', '/usr/sbin']
+    path => ['/bin', '/sbin', '/usr/bin', '/usr/local/bin', '/usr/sbin']
 }
 
 # Installing MySQL server and updating the root users password.
@@ -109,7 +112,7 @@ class { 'nginx':
 
 # Adding a vhost file for the project.
 nginx::resource::vhost { 'rehab.vagrant.local':
-    www_root => '/var/www/app',
+    www_root => $siteRoot,
     error_log => '/var/logs/app/error.log',
     access_log => '/var/logs/app/access.log',
     index_files => ['index.php', 'index.html'],
@@ -119,7 +122,7 @@ nginx::resource::vhost { 'rehab.vagrant.local':
 # Pushing all PHP files to FastCGI Process Manager (php5-fpm).
 nginx::resource::location { 'rehab.vagrant.local php files':
     vhost => 'rehab.vagrant.local',
-    www_root => '/var/www/app',
+    www_root => $siteRoot,
     fastcgi => '127.0.0.1:9000',
     location => '~ \.php$',
     location_cfg_append => {
