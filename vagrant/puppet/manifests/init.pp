@@ -1,6 +1,8 @@
 # Nginx configuration.
-$siteRoot = '/var/www/app'
 $vhostName = 'rehab.vagrant.local'
+$siteRoot = '/var/www/app'
+$errorLog = '/var/logs/app/error.log'             
+$accessLog = '/var/logs/app/access.log'
 
 # Database configuration.
 $databaseName = 'your-database-name'
@@ -107,15 +109,15 @@ augeas { 'php.ini':
 # Installing nginx package and setting up its conf file.
 class { 'nginx':
     server_tokens => 'off',
-    nginx_error_log => '/var/logs/app/error.log',
-    http_access_log => '/var/logs/app/access.log';
+    nginx_error_log => $errorLog,
+    http_access_log => $accessLog;
 }
 
 # Adding a vhost file for the project.
 nginx::resource::vhost { $vhostName:
     www_root => $siteRoot,
-    error_log => '/var/logs/app/error.log',
-    access_log => '/var/logs/app/access.log',
+    error_log => $errorLog,
+    access_log => $accessLog,
     index_files => ['index.php', 'index.html'],
     try_files => ['$uri', '$uri/', '/index.php?url=$uri&$args'];
 }
