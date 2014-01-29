@@ -1,1 +1,0 @@
-vagrant/schema/db.sql
