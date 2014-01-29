@@ -11,7 +11,7 @@ $accessLog = '/var/logs/app/access.log'
 $databaseName = 'your-database-name'
 $databaseUser = 'projectuser'
 $databasePass = '6LG621D15l37Yzv'
-$databaseFile = '/vagrant/schema/db.sql'
+$databaseFile = '/vagrant/files/db_schema.sql'
 
 # PHP configuration.
 $phpIniSettings = [
