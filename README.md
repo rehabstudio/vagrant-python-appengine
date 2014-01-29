@@ -9,8 +9,6 @@ Requirements
 - [Virtualbox 4.2](https://www.virtualbox.org)
 - [Vagrant 1.4](http://www.vagrantup.com)
 - [Vagrant Hostmanager Plugin](https://github.com/smdahlen/vagrant-hostmanager)
-- Ruby 1.9.3
-- Bundler 1.3.5
 
 Installation
 -------
@@ -27,7 +25,7 @@ Installation
 Customisation
 ------------
 
-The Vagrantfile `vagrant\Vagrantfile` and main puppet manifest `vagrant/puppet/manifests/init.pp` have a variety of configuration options at the top of their files that should be tweaked per project. Some of the configuration options affect things such as the bound ip address of the box, vhost settings, nginx log locations, database users, php settings and much more.
+The Vagrantfile `vagrant/Vagrantfile` and main puppet manifest `vagrant/puppet/manifests/init.pp` have a variety of configuration options at the top of their files that should be tweaked per project. Some of the configuration options affect things such as the bound ip address of the box, vhost settings, nginx log locations, database users, php settings and much more.
 
 By default, MySQL has a root user whose password is also root. A project-specific user is also created, whose credentials can be set via the supplied configuration options. A schema is also imported on your behalf. Replace the existing schema with your own, or, repoint the schema path to a different one. It is important to ensure your schema uses `IF NOT EXISTS` statements to ensure data is not overwritten when reprovisioning your box.
 
@@ -60,7 +58,7 @@ class dummy {
 MySQL Access
 ------------
 
-MySQL can be access internally on the box by SSHing into it using `vagrant ssh`, or, by using a desktop client (or command-line) from your host machine. The MySQL server package has been pre-configured to allow access from your remote machine (using the private IP address from vagrant). You can connect using a command (from your host machine) like the following:
+MySQL can be access internally on the box by SSHing into it using `vagrant ssh`, or, by using a desktop client (or command-line) from your host machine. The MySQL server package has been pre-configured to allow access from your remote machine (using the private IP address from vagrant) and the generated user (not the root user) has the ability to access remotely. You can connect using a command (from your host machine) like the following:
 
 ``` bash
 mysql --host=192.168.33.10 --user=username --password=password
