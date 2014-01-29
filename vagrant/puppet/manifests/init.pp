@@ -1,7 +1,10 @@
+# Vagrant / Global configuration.
+$vagrantPrivateIP = '192.168.33.10'
+$vagrantDomain = 'rehab.vagrant.local'
+
 # Nginx configuration.
-$vhostName = 'rehab.vagrant.local'
 $siteRoot = '/var/www/app'
-$errorLog = '/var/logs/app/error.log'             
+$errorLog = '/var/logs/app/error.log'
 $accessLog = '/var/logs/app/access.log'
 
 # Database configuration.
@@ -32,7 +35,7 @@ class { '::mysql::server':
     restart => true,
     override_options => {
         'mysqld' => {
-            'bind-address' => '192.168.33.10'
+            'bind-address' => $vagrantPrivateIP
         }
     }
 }
@@ -114,7 +117,7 @@ class { 'nginx':
 }
 
 # Adding a vhost file for the project.
-nginx::resource::vhost { $vhostName:
+nginx::resource::vhost { $vagrantDomain:
     www_root => $siteRoot,
     error_log => $errorLog,
     access_log => $accessLog,
@@ -123,8 +126,8 @@ nginx::resource::vhost { $vhostName:
 }
 
 # Pushing all PHP files to FastCGI Process Manager (php5-fpm).
-nginx::resource::location { "${vhostName} php files":
-    vhost => $vhostName,
+nginx::resource::location { "${vagrantDomain} php files":
+    vhost => $vagrantDomain,
     www_root => $siteRoot,
     fastcgi => '127.0.0.1:9000',
     location => '~ \.php$',
