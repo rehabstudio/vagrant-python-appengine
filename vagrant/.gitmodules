@@ -1,18 +1,18 @@
-[submodule "puppet/modules/mysql"]
-	path = puppet/modules/mysql
+[submodule "vagrant/puppet/modules/mysql"]
+	path = vagrant/puppet/modules/mysql
 	url = https://github.com/puppetlabs/puppetlabs-mysql.git
-[submodule "puppet/modules/stdlib"]
-	path = puppet/modules/stdlib
+[submodule "vagrant/puppet/modules/stdlib"]
+	path = vagrant/puppet/modules/stdlib
 	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
-[submodule "puppet/modules/apt"]
-	path = puppet/modules/apt
+[submodule "vagrant/puppet/modules/apt"]
+	path = vagrant/puppet/modules/apt
 	url = https://github.com/puppetlabs/puppetlabs-apt.git
-[submodule "puppet/modules/php"]
-	path = puppet/modules/php
+[submodule "vagrant/puppet/modules/php"]
+	path = vagrant/puppet/modules/php
 	url = https://github.com/jippi/puppet-php.git
-[submodule "puppet/modules/nginx"]
-	path = puppet/modules/nginx
+[submodule "vagrant/puppet/modules/nginx"]
+	path = vagrant/puppet/modules/nginx
 	url = https://github.com/jfryman/puppet-nginx.git
-[submodule "puppet/modules/concat"]
-	path = puppet/modules/concat
+[submodule "vagrant/puppet/modules/concat"]
+	path = vagrant/puppet/modules/concat
 	url = https://github.com/puppetlabs/puppetlabs-concat.git
