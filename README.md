@@ -68,3 +68,8 @@ Node Dependencies
 ------------
 
 The longer a project runs the more likely its dependencies will change. If you add or remove packages from your `package.json` file, simply run `vagrant provision` to have it re-run the `npm install` command on your behalf.
+
+Composer Dependencies
+------------
+
+Much like Node dependencies, the composer dependencies can be installed by running `vagrant provision` which will run `composer install` on your behalf. If there are any changes throughout the lifetime of the project, be sure to delete any composer lock files before re-provisioning.
