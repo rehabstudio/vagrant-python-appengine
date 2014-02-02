@@ -29,6 +29,10 @@ Exec {
     path => ['/bin', '/sbin', '/usr/bin', '/usr/local/bin', '/usr/sbin']
 }
 
+# Adding extra PPA's for more up to date software.
+class { 'apt': }
+apt::ppa { 'ppa:git-core/ppa': }
+
 # Installing MySQL server and updating the root users password.
 class { '::mysql::server':
     root_password => 'root',
@@ -154,7 +158,8 @@ package { [
     'libaugeas-ruby',
     'augeas-tools'
 ]:
-    ensure => present;
+    ensure => present,
+    require => Apt::Ppa['ppa:git-core/ppa']
 }
 
 # Applying a custom sign-in message for the box.
