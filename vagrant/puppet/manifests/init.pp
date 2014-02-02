@@ -164,12 +164,20 @@ package { [
     require => [Apt::Ppa['ppa:git-core/ppa'], Apt::Ppa['ppa:chris-lea/node.js']]
 }
 
-# If there are any node dependencies, they'll be installed.
+# Installing node dependencies.
 exec { 'Installing Node Packages':
     cwd => $siteRoot,
     command => 'npm install',
     require => Package['nodejs'],
     onlyif => "test -f ${siteRoot}/package.json"
+}
+
+# Installing composer dependencies.
+exec { 'Installing Composer Packages':
+    cwd => $siteRoot,
+    command => "composer install",
+    require => Class['php::composer'],
+    onlyif => "test -f ${siteRoot}/composer.json"
 }
 
 # Applying a custom sign-in message for the box.
