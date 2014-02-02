@@ -63,3 +63,8 @@ MySQL can be access internally on the box by SSHing into it using `vagrant ssh`,
 ``` bash
 mysql --host=192.168.33.10 --user=username --password=password
 ```
+
+Node Dependencies
+------------
+
+The longer a project runs the more likely its dependencies will change. If you add or remove packages from your `package.json` file, simply run `vagrant provision` to have it re-run the `npm install` command on your behalf.
