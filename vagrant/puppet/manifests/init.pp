@@ -126,7 +126,7 @@ nginx::resource::vhost { $vagrantDomain:
     error_log => $errorLog,
     access_log => $accessLog,
     index_files => ['index.php', 'index.html'],
-    try_files => ['$uri', '$uri/', '/index.php?url=$uri&$args'];
+    try_files => ['$uri', '$uri/', '/index.php?$args'];
 }
 
 # Pushing all PHP files to FastCGI Process Manager (php5-fpm).
