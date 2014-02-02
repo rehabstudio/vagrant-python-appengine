@@ -32,6 +32,7 @@ Exec {
 # Adding extra PPA's for more up to date software.
 class { 'apt': }
 apt::ppa { 'ppa:git-core/ppa': }
+apt::ppa { 'ppa:chris-lea/node.js': }
 
 # Installing MySQL server and updating the root users password.
 class { '::mysql::server':
@@ -150,6 +151,7 @@ user { 'www-data':
 
 # Installing other useful packages.
 package { [
+    'nodejs',
     'curl',
     'unzip',
     'zip',
@@ -159,7 +161,7 @@ package { [
     'augeas-tools'
 ]:
     ensure => present,
-    require => Apt::Ppa['ppa:git-core/ppa']
+    require => [Apt::Ppa['ppa:git-core/ppa'], Apt::Ppa['ppa:chris-lea/node.js']]
 }
 
 # Applying a custom sign-in message for the box.
