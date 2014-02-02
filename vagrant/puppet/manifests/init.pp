@@ -164,6 +164,14 @@ package { [
     require => [Apt::Ppa['ppa:git-core/ppa'], Apt::Ppa['ppa:chris-lea/node.js']]
 }
 
+# If there are any node dependencies, they'll be installed.
+exec { 'Installing Node Packages':
+    cwd => $siteRoot,
+    command => 'npm install',
+    require => Package['nodejs'],
+    onlyif => "test -f ${siteRoot}/package.json"
+}
+
 # Applying a custom sign-in message for the box.
 file { 'Custom Sign-in Message':
     ensure  => present,
