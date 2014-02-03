@@ -176,7 +176,7 @@ exec { 'Installing Node Packages':
 exec { 'Installing Composer Packages':
     cwd => $siteRoot,
     command => "composer install",
-    require => Class['php::composer'],
+    require => [Class['php::composer'], Package['git-core']],
     onlyif => "test -f ${siteRoot}/composer.json"
 }
 
