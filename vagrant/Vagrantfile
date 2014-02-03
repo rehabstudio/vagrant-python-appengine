@@ -5,8 +5,8 @@
 ymlconfig = YAML::load(File.open("config.yml"))
 
 # Global variables. Tailor to your projects needs.
-VB_NAME = "prototype"
-VB_RAM = "512"
+VB_NAME = ymlconfig['env']['vbname'] 
+VB_RAM = ymlconfig['env']['ram']
 DOMAIN = ymlconfig['env']['domain']
 IP = ymlconfig['env']['ip']
 
