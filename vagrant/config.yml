@@ -1,0 +1,8 @@
+env:
+    domain: "rehab.vagrant.local"
+    ip: "192.168.33.10"
+database:
+    name: "your-database-name"
+    user: "projectuser"
+    pass: "6LG621D15l37Yzv"
+    file: "/vagrant/files/db_schema.sql"

@@ -1,11 +1,14 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# Import base configuration from YAML file
+ymlconfig = YAML::load(File.open("config.yml"))
+
 # Global variables. Tailor to your projects needs.
-VB_NAME = "Insert Project Name Here"
+VB_NAME = "prototype"
 VB_RAM = "512"
-DOMAIN = "rehab.vagrant.local"
-IP = "192.168.33.10"
+DOMAIN = ymlconfig['env']['domain']
+IP = ymlconfig['env']['ip']
 
 Vagrant.require_version ">= 1.4.0"
 Vagrant.configure("2") do |config|

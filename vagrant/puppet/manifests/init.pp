@@ -1,6 +1,11 @@
+include 'stdlib'
+
+# Import base configuration from YAML file
+$ymlconfig = loadyaml("/vagrant/config.yml")
+
 # Vagrant / Global configuration.
-$vagrantPrivateIP = '192.168.33.10'
-$vagrantDomain = 'rehab.vagrant.local'
+$vagrantPrivateIP = $ymlconfig['env']['ip']
+$vagrantDomain = $ymlconfig['env']['domain']
 
 # Nginx configuration.
 $siteRoot = '/var/www/app'
@@ -8,10 +13,10 @@ $errorLog = '/var/logs/app/error.log'
 $accessLog = '/var/logs/app/access.log'
 
 # Database configuration.
-$databaseName = 'your-database-name'
-$databaseUser = 'projectuser'
-$databasePass = '6LG621D15l37Yzv'
-$databaseFile = '/vagrant/files/db_schema.sql'
+$databaseName = $ymlconfig['database']['name']
+$databaseUser = $ymlconfig['database']['user']
+$databasePass = $ymlconfig['database']['pass']
+$databaseFile = $ymlconfig['database']['file']
 
 # PHP configuration.
 $phpIniSettings = [
