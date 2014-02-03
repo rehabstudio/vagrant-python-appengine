@@ -29,7 +29,6 @@ Exec {
 # Adding extra PPA's for more up to date software.
 class { 'apt': }
 apt::ppa { 'ppa:git-core/ppa': }
-apt::ppa { 'ppa:chris-lea/node.js': }
 
 # Installing MySQL server and updating the root users password.
 class { '::mysql::server':
@@ -149,7 +148,6 @@ user { 'www-data':
 
 # Installing other useful packages.
 package { [
-    'nodejs',
     'curl',
     'unzip',
     'zip',
@@ -159,14 +157,29 @@ package { [
     'augeas-tools'
 ]:
     ensure => present,
-    require => [Apt::Ppa['ppa:git-core/ppa'], Apt::Ppa['ppa:chris-lea/node.js']]
+    require => Apt::Ppa['ppa:git-core/ppa']
+}
+
+# Installing node library.
+class { 'nodejs':
+    manage_repo => true
+}
+
+# Installing node executables.
+package { [
+    'grunt-cli',
+    'bower'
+]:
+    ensure => present,
+    provider => 'npm',
+    require => Class['nodejs']
 }
 
 # Installing node dependencies.
 exec { 'Installing Node Packages':
     cwd => $siteRoot,
     command => 'npm install',
-    require => Package['nodejs'],
+    require => Class['nodejs'],
     onlyif => "test -f ${siteRoot}/package.json"
 }
 
