@@ -143,6 +143,7 @@ nginx::resource::location { "${vagrantDomain} php files":
     location => '~ \.php$',
     location_cfg_append => {
         fastcgi_param => 'APPLICATION_ENV local',
+        fastcgi_param => "PHP_VALUE include_path=.:/usr/share/php:/usr/share/pear",
         fastcgi_index => 'index.php'
     },
     notify => Class['nginx::service'];
