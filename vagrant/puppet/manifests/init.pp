@@ -1,16 +1,16 @@
 include 'stdlib'
 
 # Import base configuration from YAML file
-$ymlconfig = loadyaml("/vagrant/config.yml")
+$ymlconfig = loadyaml('/vagrant/config.yml')
 
 # Vagrant / Global configuration.
 $vagrantPrivateIP = $ymlconfig['env']['ip']
 $vagrantDomain = $ymlconfig['env']['domain']
 
 # Nginx configuration.
-$siteRoot = '/var/www/app'
-$errorLog = '/var/logs/app/error.log'
-$accessLog = '/var/logs/app/access.log'
+$siteRoot = $ymlconfig['nginx']['siteRoot']
+$errorLog = $ymlconfig['nginx']['errorLog']
+$accessLog = $ymlconfig['nginx']['accessLog']
 
 # Database configuration.
 $databaseName = $ymlconfig['database']['name']
@@ -19,15 +19,7 @@ $databasePass = $ymlconfig['database']['pass']
 $databaseFile = $ymlconfig['database']['file']
 
 # PHP configuration.
-$phpIniSettings = [
-    "set PHP/short_open_tag Off",
-    "set PHP/expose_php Off",
-    "set PHP/display_errors On",
-    "set PHP/html_errors On",
-    "set PHP/post_max_size 128M",
-    "set PHP/upload_max_filesize 128M",
-    "set Date/date.timezone Europe/Belfast"
-]
+$phpIniSettings = $ymlconfig['php']['iniOverrides']
 
 # Adding a global exec statement so we don't have to add paths to every one.
 Exec {
