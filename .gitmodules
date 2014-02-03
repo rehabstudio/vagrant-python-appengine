@@ -16,3 +16,6 @@
 [submodule "vagrant/puppet/modules/concat"]
 	path = vagrant/puppet/modules/concat
 	url = https://github.com/puppetlabs/puppetlabs-concat.git
+[submodule "nodejs"]
+	path = nodejs
+	url = https://github.com/puppetlabs/puppetlabs-nodejs.git
