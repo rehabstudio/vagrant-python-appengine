@@ -160,6 +160,15 @@ package { [
     require => Apt::Ppa['ppa:git-core/ppa']
 }
 
+# Installing ruby gems.
+package { [
+    'sass',
+    'compass'
+]:
+    ensure => 'installed',
+    provider => 'gem'
+}
+
 # Installing node library.
 class { 'nodejs':
     manage_repo => true
