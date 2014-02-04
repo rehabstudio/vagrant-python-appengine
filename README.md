@@ -25,7 +25,7 @@ Installation
 Customisation
 ------------
 
-A single YAML configuration file can be found in 'vagrant/config.yml' which will contain the majority of common settings that you will wish to tweak per project.
+A single YAML configuration file can be found in `vagrant/config.yml` which will contain the majority of common settings that you will wish to tweak per project.
 
 The Vagrantfile `vagrant/Vagrantfile` and main puppet manifest `vagrant/puppet/manifests/init.pp` have a variety of configuration options at the top of their files that should be tweaked per project. Some of the configuration options affect things such as the bound ip address of the box, vhost settings, nginx log locations, database users, php settings and much more.
 
