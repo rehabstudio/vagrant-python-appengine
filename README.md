@@ -6,6 +6,7 @@ Simple vagrant build for a general php/mysql setup on nginx. This will boot up a
 Requirements
 ------------
 
+- Ruby >= 1.9.3
 - [Virtualbox 4.2](https://www.virtualbox.org)
 - [Vagrant 1.4](http://www.vagrantup.com)
 - [Vagrant Hostmanager Plugin](https://github.com/smdahlen/vagrant-hostmanager)
