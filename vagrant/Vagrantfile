@@ -1,6 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require 'yaml'
+
 # Import base configuration from YAML file
 ymlconfig = YAML::load(File.open("config.yml"))
 
