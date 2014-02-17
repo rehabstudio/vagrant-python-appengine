@@ -7,7 +7,7 @@ require 'yaml'
 ymlconfig = YAML::load(File.open("config.yml"))
 
 # Global variables. Tailor to your projects needs.
-VB_NAME = ymlconfig['env']['vbname'] 
+VB_NAME = ymlconfig['env']['vbname']
 VB_RAM = ymlconfig['env']['ram']
 DOMAIN = ymlconfig['env']['domain']
 IP = ymlconfig['env']['ip']
@@ -42,8 +42,8 @@ Vagrant.configure("2") do |config|
     end
 
     # Share additional folders to the guest VM.
-    config.vm.synced_folder "../app", "/var/www/app"
-    config.vm.synced_folder "logs", "/var/logs/app"
+    config.vm.synced_folder "../app", "/home/vagrant/app"
+    config.vm.synced_folder "logs", "/home/vagrant/logs"
 
     # Before puppet provisioner (to update packages).
     config.vm.provision :shell, :path => "before_puppet.sh"
