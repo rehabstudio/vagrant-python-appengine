@@ -9,12 +9,6 @@
 	url = https://github.com/puppetlabs/puppetlabs-apt.git
 [submodule "vagrant/puppet/modules/php"]
 	path = vagrant/puppet/modules/php
-	url = https://github.com/jippi/puppet-php.git
-[submodule "vagrant/puppet/modules/nginx"]
-	path = vagrant/puppet/modules/nginx
-	url = https://github.com/jfryman/puppet-nginx.git
-[submodule "vagrant/puppet/modules/concat"]
-	path = vagrant/puppet/modules/concat
 	url = https://github.com/puppetlabs/puppetlabs-concat.git
 [submodule "vagrant/puppet/modules/nodejs"]
 	path = vagrant/puppet/modules/nodejs
