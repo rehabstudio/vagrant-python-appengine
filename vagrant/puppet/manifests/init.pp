@@ -55,8 +55,11 @@ package { [
     'zip',
     'git-core',
     'vim',
-    'libaugeas-ruby',
-    'augeas-tools'
+    'memcached',
+    'python-dev',
+    'python-imaging',
+    'python-virtualenv',
+    'virtualenvwrapper',
 ]:
     ensure => present,
     require => Apt::Ppa['ppa:git-core/ppa']
@@ -100,4 +103,24 @@ file { 'Custom Sign-in Message':
     replace => true,
     path => '/etc/motd',
     source  => '/vagrant/files/welcome.txt';
+}
+
+# Add a custom bashrc for the vagrant user
+file { 'Custom bashrc':
+    ensure  => present,
+    replace => true,
+    path => '/home/vagrant/.bashrc',
+    source  => '/vagrant/files/bashrc',
+    mode    => '0644',
+    owner    => 'vagrant';
+}
+
+archive { 'google_appengine_sdk':
+   ensure => present,
+   url => 'http://googleappengine.googlecode.com/files/google_appengine_1.8.9.zip',
+   target => '/opt',
+   follow_redirects => true,
+   extension => 'zip',
+   checksum => false,
+   src_target => '/tmp'
 }
