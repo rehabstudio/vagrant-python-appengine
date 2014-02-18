@@ -1,7 +1,7 @@
 PHP/NGINX/MySQL VAGRANT BOX
 ===========================
 
-Simple vagrant build for a general php/mysql setup on nginx. This will boot up an nginx/php/mysql ubuntu box for a single instance. It uses host manager for easy local DNS configuration. 
+Simple vagrant build for a general Python/Google Appengine development box. This will boot up an ubuntu 12.04 instance and install an entire appengine development environment. It uses host manager for easy local DNS configuration.
 
 Requirements
 ------------
@@ -20,8 +20,11 @@ Installation
 2. Navigate inside the vagrant folder and create the guest machine
 `cd vagrant && vagrant up`
 
-3. After the installation finishes, visit the chosen domain:
-`http://rehab.vagrant.local`
+3. After the installation finishes, ssh into the box and run the development server:
+
+    vagrant ssh
+    runserver
+
 
 Customisation
 ------------
@@ -32,9 +35,6 @@ The Vagrantfile `vagrant/Vagrantfile` and main puppet manifest `vagrant/puppet/m
 
 By default, MySQL has a root user whose password is also root. A project-specific user is also created, whose credentials can be set via the supplied configuration options. A schema is also imported on your behalf which can be found at `vagrant/files/db_schema.sql`. Replace the existing schemawith your own, or, repoint the schema path to a different one. It is important to ensure your schema uses `IF NOT EXISTS` statements to ensure data is not overwritten when reprovisioning your box.
 
-Alongside PHP being installed, PHPUnit and Composer are already present. PHP settings are changed using a tool known as [Augeas](http://augeas.net/) which has a specific syntax to follow. This should be taken into consideration if you are wanting to change ini settings other than those already listed/changed. You can also change the installed extensions by finding the `php::extension` declaration.
-
-It should also be noted that this is just a base for you to build upon. These scripts should be adapted to best suit your project and to mirror your live location as closely as possible.
 
 MySQL Access
 ------------
@@ -50,10 +50,6 @@ Node Dependencies
 
 There is a statement included in the puppet files to search your `$siteRoot` for a `package.json` file. If one is found, then the command `npm install` will be run on your behalf. The longer a project runs the more likely its dependencies will change. If you add or remove packages from your `package.json` file, simply run `vagrant provision` to have it re-run the `npm install` command.
 
-Composer Dependencies
-------------
-
-Similar to Node, puppet will search your `$siteRoot` for a `composer.json` file. If one is found, then the command `composer install` will be run on your behalf. If there are any changes throughout the lifetime of the project, be sure to manually delete any composer lock files before re-provisioning using the command `vagrant provision`.
 
 Writing Your Own Module
 -------
