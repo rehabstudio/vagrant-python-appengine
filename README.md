@@ -1,5 +1,5 @@
-PHP/NGINX/MySQL VAGRANT BOX
-===========================
+PYTHON/APPENGINE VAGRANT BOX
+============================
 
 Simple vagrant build for a general Python/Google Appengine development box. This will boot up an ubuntu 12.04 instance and install an entire appengine development environment. It uses host manager for easy local DNS configuration.
 
