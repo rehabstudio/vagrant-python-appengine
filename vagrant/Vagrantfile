@@ -43,7 +43,7 @@ Vagrant.configure("2") do |config|
 
     # Share additional folders to the guest VM.
     config.vm.synced_folder "../app", "/home/vagrant/app"
-    config.vm.synced_folder "logs", "/home/vagrant/logs"
+    config.vm.synced_folder "storage", "/home/vagrant/storage"
 
     # Before puppet provisioner (to update packages).
     config.vm.provision :shell, :path => "before_puppet.sh"
