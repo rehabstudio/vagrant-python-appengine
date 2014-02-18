@@ -7,9 +7,12 @@
 [submodule "vagrant/puppet/modules/apt"]
 	path = vagrant/puppet/modules/apt
 	url = https://github.com/puppetlabs/puppetlabs-apt.git
-[submodule "vagrant/puppet/modules/php"]
-	path = vagrant/puppet/modules/php
+[submodule "vagrant/puppet/modules/concat"]
+	path = vagrant/puppet/modules/concat
 	url = https://github.com/puppetlabs/puppetlabs-concat.git
 [submodule "vagrant/puppet/modules/nodejs"]
 	path = vagrant/puppet/modules/nodejs
 	url = https://github.com/puppetlabs/puppetlabs-nodejs.git
+[submodule "vagrant/puppet/modules/archive"]
+	path = vagrant/puppet/modules/archive
+	url = https://github.com/camptocamp/puppet-archive.git
