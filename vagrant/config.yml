@@ -2,22 +2,8 @@ env:
     domain: "rehab.vagrant.local"
     ip: "192.168.33.10"
     ram: 512
-    vbname: "Insert Project Name Here"
+    vbname: "Appengine Project"
 database:
-    name: "your-database-name"
-    user: "projectuser"
-    pass: "6LG621D15l37Yzv"
-    file: "/vagrant/files/db_schema.sql"
-nginx:
-    siteRoot: '/var/www/app'
-    errorLog: '/var/logs/app/error.log'
-    accessLog: '/var/logs/app/access.log'
-php:
-    iniOverrides: [
-        "set PHP/short_open_tag Off",
-        "set PHP/expose_php Off",
-        "set PHP/display_errors On",
-        "set PHP/html_errors On",
-        "set PHP/post_max_size 128M",
-        "set PHP/upload_max_filesize 128M",
-        "set Date/date.timezone Europe/Belfast"]
+    name: "appengine-database"
+    user: "appengine-user"
+    pass: "appengine-password"
