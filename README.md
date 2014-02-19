@@ -1,39 +1,54 @@
-PYTHON/APPENGINE VAGRANT BOX
+Python/Appengine Vagrant box
 ============================
 
-Simple vagrant build for a general Python/Google Appengine development box. This will boot up an ubuntu 12.04 instance and install an entire appengine development environment. It uses host manager for easy local DNS configuration.
+![vagrant-python-appengine](https://dl.dropboxusercontent.com/u/266793/vagrant/vagrant-appengine.png)
+
+
+Simple vagrant box for a Python/Google Appengine development environment. This will boot up an ubuntu 12.04 instance and install an entire appengine development environment. It uses host manager for easy local DNS configuration.
+
 
 Requirements
 ------------
 
-- Ruby >= 1.9.3
-- [Virtualbox 4.2](https://www.virtualbox.org)
-- [Vagrant 1.4](http://www.vagrantup.com)
+Before you can use this project, you'll need to install a few dependencies:
+
+- [Virtualbox >= 4.2](https://www.virtualbox.org)
+- [Vagrant >= 1.4](http://www.vagrantup.com)
 - [Vagrant Hostmanager Plugin](https://github.com/smdahlen/vagrant-hostmanager)
 
-Installation
--------
 
-1. Clone this repository and install git submodules:
-`git submodule update --init`
+Installation/Provisioning
+-------------------------
 
-2. Navigate inside the vagrant folder and create the guest machine
-`cd vagrant && vagrant up`
+Using this box is simple, you can be up and running with a few short commands:
 
-3. After the installation finishes, ssh into the box and run the development server:
+First, clone this repository to an appropriate location.
 
-    vagrant ssh
-    runserver
+``` bash
+git clone git@github.com:rehabstudio/vagrant-python-appengine.git myproject
+```
+
+Next, navigate inside the vagrant folder and provision the guest instance.
+
+``` bash
+cd myproject/vagrant
+vagrant up
+```
+
+Once provisioned, you can ssh into the running box and start the appengine development server:
+
+``` bash
+vagrant ssh
+runserver  # a globally installed alias for dev_appserver.py with some sensible defaults
+```
 
 
 Customisation
 ------------
 
-A single YAML configuration file can be found in `vagrant/config.yml` which will contain the majority of common settings that you will wish to tweak per project.
+A single YAML configuration file can be found in `vagrant/config.yml` which will contain the most commonly used settings that you may wish to tweak on per project basis.
 
-The Vagrantfile `vagrant/Vagrantfile` and main puppet manifest `vagrant/puppet/manifests/init.pp` have a variety of configuration options at the top of their files that should be tweaked per project. Some of the configuration options affect things such as the bound ip address of the box, vhost settings, nginx log locations, database users, php settings and much more.
-
-By default, MySQL has a root user whose password is also root. A project-specific user is also created, whose credentials can be set via the supplied configuration options. A schema is also imported on your behalf which can be found at `vagrant/files/db_schema.sql`. Replace the existing schemawith your own, or, repoint the schema path to a different one. It is important to ensure your schema uses `IF NOT EXISTS` statements to ensure data is not overwritten when reprovisioning your box.
+The Vagrantfile `vagrant/Vagrantfile` and main puppet manifest `vagrant/puppet/manifests/init.pp` contain a number of configuration options that can be tweaked per project.
 
 
 MySQL Access
@@ -45,30 +60,18 @@ MySQL can be accessed internally on the box by SSHing into it using `vagrant ssh
 mysql --host=192.168.33.10 --user=username --password=password
 ```
 
-Node Dependencies
-------------
 
-There is a statement included in the puppet files to search your `$siteRoot` for a `package.json` file. If one is found, then the command `npm install` will be run on your behalf. The longer a project runs the more likely its dependencies will change. If you add or remove packages from your `package.json` file, simply run `vagrant provision` to have it re-run the `npm install` command.
+Node Dependencies (NPM)
+-----------------------
+
+There is a statement included in the puppet files to search your application root for a `package.json` file. If one is found, then the command `npm install` will be run on your behalf. The longer a project runs the more likely its dependencies will change. If you add or remove packages from your `package.json` file, simply run `vagrant provision` to have it re-run the `npm install` command.
 
 
-Writing Your Own Module
--------
+Appengine Python SDK
+--------------------
 
-You can install additional software quite simply by using the following steps.
-- Create a folder in `vagrant/puppet/modules/` directory for your package, eg. 'dummy'
-- Create two folders inside that folder called `files` and `manifests`
-- In the new manifests folder create a file called `init.pp` and enter the puppet manifest appropriately, eg.
+The Python SDK for Google Appengine will be downloaded and installed during provisioning of the box along with all necessary dependencies. The appropriate paths will be added to the system path to make the SDK's binaries accessible from any location within the box. A simple `runserver` alias for `dev_appserver.py` is provided that will allow you to run your app with sensible default settings.
 
+``` bash
+alias runserver='dev_appserver.py /home/vagrant/app --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /home/vagrant/storage --skip_sdk_update_check'
 ```
-class dummy {
-    package { [
-            (..LIST ALL PACKAGES HERE..)
-        ]:
-        ensure => present;
-    }
-    (..ANY OTHER PUPPET COMMANDS..)
-}
-```
-- The `files` folder should be used for any files that you are using in your manifest. These can be referenced inside your manifest file by using the URI pattern: `puppet:///modules/dummy/my.cnf` (note that `files/` is skipped in this URI).
-- Once your module is complete you can call it from the main puppet manifest file `puppet/manifests/init.pp` by using the syntax: `include dummy`
-- Run `vagrant reload --provision` to pull in your new config
