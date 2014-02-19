@@ -81,16 +81,6 @@ fi
 PROMPT_DIRTRIM=2
 
 
-##################
-#                #
-# PATH ADDITIONS #
-#                #
-##################
-
-
-export PATH="$PATH:/opt/google_appengine"
-
-
 ###########
 #         #
 # ALIASES #
@@ -124,6 +114,3 @@ alias dux='du -h . --max-depth 1 | sort -h'
 
 # display all dirs in a directory in descending order of size (skips other filesystems)
 alias duxx='du -h . --max-depth 1 -x | sort -h'
-
-# add simple alias to run dev_appserver.py with useful defaults
-alias runserver='dev_appserver.py /home/vagrant/app --host 0.0.0.0 --admin_host 0.0.0.0 --storage_path /home/vagrant/storage --skip_sdk_update_check'
