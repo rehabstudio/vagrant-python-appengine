@@ -43,24 +43,6 @@ runserver  # a globally installed alias for dev_appserver.py with some sensible 
 ```
 
 
-Customisation
-------------
-
-A single YAML configuration file can be found in `vagrant/config.yml` which will contain the most commonly used settings that you may wish to tweak on per project basis.
-
-The Vagrantfile `vagrant/Vagrantfile` and main puppet manifest `vagrant/puppet/manifests/init.pp` contain a number of configuration options that can be tweaked per project.
-
-
-MySQL Access
-------------
-
-MySQL can be accessed internally on the box by SSHing into it using `vagrant ssh`, or, by using a desktop client (or command-line) from your host machine. The MySQL server package has been pre-configured to allow access from your remote machine using a combination of the private IP address from vagrant and the generated users credentials. You can connect using a command (from your host machine) like the following:
-
-``` bash
-mysql --host=192.168.33.10 --user=username --password=password
-```
-
-
 Node Dependencies (NPM)
 -----------------------
 

@@ -29,7 +29,6 @@ package { [
     require => Apt::Ppa['ppa:git-core/ppa']
 }
 
-# install the build dependencies for both PIL and mysqldb, this allows both to
+# install the build dependencies for , this allows it (or Pillow) to
 # be easily built inside a virtualenv when required
 apt::builddep { 'python-imaging': }
-apt::builddep { 'python-mysqldb': }

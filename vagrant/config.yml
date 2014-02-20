@@ -1,9 +1,2 @@
-env:
-    domain: "rehab.vagrant.local"
-    ip: "192.168.33.10"
-    ram: 512
-    vbname: "Appengine Project"
-database:
-    name: "appengine-database"
-    user: "appengine-user"
-    pass: "appengine-password"
+domain: "rehab.vagrant.local"
+private_ip: "192.168.33.10"

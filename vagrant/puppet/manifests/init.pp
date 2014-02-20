@@ -7,7 +7,6 @@ import 'appengine.pp'
 import 'apt_packages.pp'
 import 'bashrc.pp'
 import 'motd.pp'
-import 'mysql.pp'
 import 'nodejs.pp'
 import 'rubygems.pp'
 
