@@ -14,6 +14,7 @@ Before you can use this project, you'll need to install a few dependencies:
 
 - [Virtualbox >= 4.2](https://www.virtualbox.org)
 - [Vagrant >= 1.4](http://www.vagrantup.com)
+- [Vagrant Vbguest Plugin](https://github.com/dotless-de/vagrant-vbguest)
 - [Vagrant Hostmanager Plugin](https://github.com/smdahlen/vagrant-hostmanager)
 
 

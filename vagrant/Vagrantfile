@@ -13,6 +13,9 @@ IP = ymlconfig['private_ip']
 Vagrant.require_version ">= 1.4.0"
 Vagrant.configure("2") do |config|
 
+    # Vbguest plugin configuration.
+    config.vbguest.auto_update = true
+
     # Hostmanager plugin configuration.
     config.hostmanager.enabled = true
     config.hostmanager.ignore_private_ip = false
